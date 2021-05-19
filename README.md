@@ -1,3 +1,6 @@
+### About this Fork
+Bumps Gatsby major version to `^3.4`
+
 # Gravity Forms Form Component
 
 A (relatively) plug and play component for parsing [gatsby-source-gravityforms](https://www.npmjs.com/package/gatsby-source-gravityforms) GraphQL data. Outputs a component using BEM classes, meaning all you need to do is style it.
