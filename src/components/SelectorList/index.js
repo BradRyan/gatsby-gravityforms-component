@@ -19,8 +19,9 @@ const SelectorList = ({ errors, fieldData, name, register, ...wrapProps }) => {
             <ul className={`gfield_${type}`} id={name}>
                 {options.map(({ isSelected, text, value }, index) => {
                     const choiceID = index + 1
+                    const choiceName = type === 'radio' ? name : `${name}_${choiceID}`;
                     return (
-                        <li key={`${name}-${index + 1}`}>
+                        <li key={`${name}-${choiceID}`}>
                             <input
                                 className={classnames(
                                     `gravityform__field__input__${type}`,
@@ -31,7 +32,7 @@ const SelectorList = ({ errors, fieldData, name, register, ...wrapProps }) => {
                                 )}
                                 defaultChecked={isSelected}
                                 id={`${name}_${choiceID}`}
-                                name={`${name}_${choiceID}`}
+                                name={choiceName}
                                 ref={register({
                                     required:
                                         isRequired && strings.errors.required,
@@ -40,7 +41,7 @@ const SelectorList = ({ errors, fieldData, name, register, ...wrapProps }) => {
                                 value={value}
                             />
                             &nbsp;
-                            <label htmlFor={`${name}_${choiceID}`}>
+                            <label htmlFor={choiceName}>
                                 {ReactHtmlParser(text)}
                             </label>
                         </li>
