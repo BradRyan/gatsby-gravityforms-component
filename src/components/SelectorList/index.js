@@ -18,20 +18,23 @@ const SelectorList = ({ errors, fieldData, name, register, ...wrapProps }) => {
         >
             <ul className={`gfield_${type}`} id={name}>
                 {options.map(({ isSelected, text, value }, index) => {
-                    const choiceID = index + 1
-                    const choiceName = type === 'radio' ? name : `${name}_${choiceID}`;
+                    const choiceNumber = index + 1
+                    const choiceId = `${name}-${choiceNumber}`
+                    
+                    // For radio, the name should be the same for all selctions
+                    const choiceName = type === 'radio' ? name : choiceId
+
                     return (
-                        <li key={`${name}-${choiceID}`}>
+                        <li key={choiceId}>
                             <input
                                 className={classnames(
                                     `gravityform__field__input__${type}`,
-                                    `gravityform__field__input__${type}--` +
-                                        choiceID,
+                                    `gravityform__field__input__${type}--${choiceNumber}`,
                                     cssClass,
                                     size
                                 )}
                                 defaultChecked={isSelected}
-                                id={`${name}_${choiceID}`}
+                                id={choiceId}
                                 name={choiceName}
                                 ref={register({
                                     required:
@@ -41,7 +44,7 @@ const SelectorList = ({ errors, fieldData, name, register, ...wrapProps }) => {
                                 value={value}
                             />
                             &nbsp;
-                            <label htmlFor={choiceName}>
+                            <label htmlFor={choiceId}>
                                 {ReactHtmlParser(text)}
                             </label>
                         </li>
