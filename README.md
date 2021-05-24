@@ -1,5 +1,7 @@
-### About this Fork
-Bumps Gatsby major version to `^3.4`
+## What's new in this fork?
+1. Bumps Gatsby major version to `^3.4`
+2. Includes additional field attributes in the graphql fragment (intend to support inline input grouping)
+3. Updates radio labels so that you cannot multi-select
 
 # Gravity Forms Form Component
 
