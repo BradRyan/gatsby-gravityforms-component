@@ -40,6 +40,7 @@ export const GravityFormField = graphql`
         errorMessage
         inputMaskValue
         isRequired
+        layoutGroupId
         visibility
         cssClass
         placeholder

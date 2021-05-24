@@ -19,8 +19,12 @@ const FieldBuilder = ({
     errors,
     setValue,
 }) => {
+    // TODO: How can we group fields and make them inline?
+    // - 'layoutGroupId' is common if fields are inline
+    // - want to wrap entire row in <li> with some sort of inline class I suppose?
+
     // Loop through fields and create
-    return formData.formFields.map(field => {
+    return formData.formFields.map((field) => {
         // Set the wrapper classes
         const {
             descriptionPlacement: fieldDescPlace,
