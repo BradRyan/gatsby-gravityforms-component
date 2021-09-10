@@ -16,16 +16,16 @@ const SelectorList = ({ errors, fieldData, name, register, ...wrapProps }) => {
             labelFor={name}
             {...wrapProps}
         >
-            <ul className={`gfield_${type}`} id={name}>
+            <div className={`gfield_${type}`} id={name}>
                 {options.map(({ isSelected, text, value }, index) => {
                     const choiceNumber = index + 1
                     const choiceId = `${name}-${choiceNumber}`
-                    
+
                     // For radio, the name should be the same for all selctions
                     const choiceName = type === 'radio' ? name : choiceId
 
                     return (
-                        <li key={choiceId}>
+                        <div key={choiceId}>
                             <input
                                 className={classnames(
                                     `gravityform__field__input__${type}`,
@@ -47,10 +47,10 @@ const SelectorList = ({ errors, fieldData, name, register, ...wrapProps }) => {
                             <label htmlFor={choiceId}>
                                 {ReactHtmlParser(text)}
                             </label>
-                        </li>
+                        </div>
                     )
                 })}
-            </ul>
+            </div>
         </InputWrapper>
     )
 }
