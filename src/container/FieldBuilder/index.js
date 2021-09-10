@@ -24,6 +24,8 @@ const FieldBuilder = ({
     // - 'layoutGroupId' is common if fields are inline
     // - want to wrap entire row in <li> with some sort of inline class I suppose?
 
+    console.warn({ formData, presetValues, errors })
+
     // Loop through fields and create
     return formData.formFields.map((field) => {
         // Set the wrapper classes
@@ -163,6 +165,7 @@ const FieldBuilder = ({
                     />
                 )
 
+            // TODO: What do other compount inputs look like?
             case 'name':
                 return (
                     <Name

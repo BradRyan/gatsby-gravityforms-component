@@ -26,10 +26,13 @@ const Name = ({
                 return (
                     <Input
                         errors={errors[inputName]}
-                        fieldData={fieldData}
+                        fieldData={{
+                            ...fieldData,
+                            label: input.label,
+                            type: 'text',
+                        }}
                         key={input.id}
                         name={inputName}
-                        label={input.label}
                         register={register}
                         value={
                             get(presetValues, inputName, false)
