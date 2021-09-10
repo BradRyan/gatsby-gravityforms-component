@@ -180,6 +180,9 @@ const FieldBuilder = ({
                     />
                 )
 
+            case 'address':
+                return <div>Address Form Here</div>
+
             default:
                 return null
         }
