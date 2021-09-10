@@ -1,7 +1,10 @@
 import classnames from 'classnames'
 import PropTypes from 'prop-types'
 import React from 'react'
+import get from 'lodash/get'
+
 import Input from '../Input'
+import { ifDefaultValue } from '../../utils/inputSettings'
 
 const Name = ({
     errors,
@@ -18,7 +21,7 @@ const Name = ({
         <div>
             {inputs.map((input) => {
                 if (input.isHidden) return null
-                const inputName = `input_${field.id}`
+                const inputName = `input_${input.id}`
 
                 return (
                     <Input
@@ -30,10 +33,9 @@ const Name = ({
                         value={
                             get(presetValues, inputName, false)
                                 ? get(presetValues, inputName, false)
-                                : ifDefaultValue(field)
+                                : ifDefaultValue(input)
                         }
-                        wrapClassName={inputWrapperClass}
-                        wrapId={wrapId}
+                        {...wrapProps}
                     />
                 )
             })}
