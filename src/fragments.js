@@ -47,5 +47,19 @@ export const GravityFormField = graphql`
         size
         defaultValue
         maxLength
+        rangeMax
+        rangeMin
+        inputs {
+            label
+            name
+            id
+            isHidden
+            inputType
+            autocompleteAttribute
+            choices {
+                value
+                text
+            }
+        }
     }
 `

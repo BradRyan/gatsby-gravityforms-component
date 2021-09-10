@@ -9,12 +9,31 @@ const Input = ({ errors, fieldData, name, register, value, ...wrapProps }) => {
         cssClass,
         inputMaskValue,
         isRequired,
-        maxLength,
+        maxLength: fieldDataMaxLength,
         placeholder,
         size,
         type,
+        rangeMax,
+        rangeMin,
     } = fieldData
     const regex = inputMaskValue ? new RegExp(inputMaskValue) : false
+    const maxLength = rangeMax ? Number(rangeMax) : fieldDataMaxLength || 524288
+    const minLength = rangeMin ? Number(rangeMin) : undefined
+
+    const numberProps = {}
+    // NOTE: Physically prevent inputing more than max length when provided for number input field
+    if (type === 'number' && rangeMax) {
+        const inputHandler = (e) => {
+            const { value, maxLength } = e.target
+            if (String(value).length >= maxLength) {
+                e.preventDefault()
+                return
+            }
+        }
+
+        numberProps.onKeyPress = inputHandler
+    }
+
     return (
         <InputWrapper
             errors={errors}
@@ -33,7 +52,9 @@ const Input = ({ errors, fieldData, name, register, value, ...wrapProps }) => {
                 )}
                 defaultValue={value}
                 id={name}
-                maxLength={maxLength || 524288} // 524288 = 512kb, avoids invalid prop type error if maxLength is undefined.
+                maxLength={maxLength} // 524288 = 512kb, avoids invalid prop type error if maxLength is undefined.
+                minLength={minLength}
+                {...numberProps}
                 name={name}
                 placeholder={placeholder}
                 ref={register({
@@ -44,6 +65,13 @@ const Input = ({ errors, fieldData, name, register, value, ...wrapProps }) => {
                             maxLength > 0 &&
                             `${strings.errors.maxChar.front}  ${maxLength} ${strings.errors.maxChar.back}`,
                     },
+                    // TODO: Do we need to register minLength some how?
+                    // minLength: {
+                    //     value: minLength > 0 && minLength,
+                    //     message:
+                    //         minLength > 0 &&
+                    //         `${strings.errors.minChar.front}  ${minLength} ${strings.errors.minChar.back}`,
+                    // },
                     pattern: {
                         value: regex,
                         message: regex && strings.errors.pattern,

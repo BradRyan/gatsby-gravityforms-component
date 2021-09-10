@@ -6,6 +6,7 @@ import Captcha from '../../components/Captcha'
 import Html from '../../components/Html'
 import Input from '../../components/Input'
 import Multiselect from '../../components/Multiselect'
+import Name from '../../components/Name'
 import Select from '../../components/Select'
 import SelectorList from '../../components/SelectorList'
 import Textarea from '../../components/Textarea'
@@ -82,6 +83,7 @@ const FieldBuilder = ({
             case 'email':
             case 'hidden':
             case 'phone':
+            case 'date':
                 return (
                     <Input
                         errors={errors[inputName]}
@@ -156,6 +158,17 @@ const FieldBuilder = ({
                         fieldData={fieldData}
                         key={field.id}
                         name={inputName}
+                        wrapClassName={inputWrapperClass}
+                        wrapId={wrapId}
+                    />
+                )
+
+            case 'name':
+                return (
+                    <Name
+                        presetValues={presetValues}
+                        fieldData={fieldData}
+                        key={field.id}
                         wrapClassName={inputWrapperClass}
                         wrapId={wrapId}
                     />
