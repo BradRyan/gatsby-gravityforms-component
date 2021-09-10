@@ -16,16 +16,20 @@ const Name = ({
     ...wrapProps
 }) => {
     const { inputs } = fieldData
+    const fieldErrors = errors[name]
 
     return (
         <div>
             {inputs.map((input) => {
                 if (input.isHidden) return null
                 const inputName = `input_${input.id}`
+                const inputErrors = {
+                    [inputName]: fieldErrors?.[input.id],
+                }
 
                 return (
                     <Input
-                        errors={errors[inputName]}
+                        errors={inputErrors}
                         fieldData={{
                             ...fieldData,
                             label: input.label,

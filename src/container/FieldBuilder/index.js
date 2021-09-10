@@ -169,6 +169,7 @@ const FieldBuilder = ({
             case 'name':
                 return (
                     <Name
+                        name={inputName}
                         errors={errors}
                         register={register}
                         presetValues={presetValues}
