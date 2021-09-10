@@ -7,7 +7,7 @@ import Input from '../Input'
 import { ifDefaultValue } from '../../utils/inputSettings'
 
 const Name = ({
-    errors,
+    errors = [],
     fieldData,
     name,
     register,
@@ -16,7 +16,6 @@ const Name = ({
     ...wrapProps
 }) => {
     const { inputs } = fieldData
-    const fieldErrors = errors[name]
 
     return (
         <div>
@@ -24,8 +23,11 @@ const Name = ({
                 if (input.isHidden) return null
                 const inputName = `input_${input.id}`
                 const inputErrors = {
-                    [inputName]: fieldErrors?.[input.id],
+                    [inputName]:
+                        errors.find(({ ref }) => ref.id === inputName) || {},
                 }
+
+                console.warn({ inputErrors })
 
                 return (
                     <Input

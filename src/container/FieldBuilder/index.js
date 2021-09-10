@@ -170,7 +170,7 @@ const FieldBuilder = ({
                 return (
                     <Name
                         name={inputName}
-                        errors={errors}
+                        errors={errors[inputName]}
                         register={register}
                         presetValues={presetValues}
                         fieldData={fieldData}
