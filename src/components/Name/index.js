@@ -29,6 +29,7 @@ const Name = ({
                         fieldData={fieldData}
                         key={input.id}
                         name={inputName}
+                        label={input.label}
                         register={register}
                         value={
                             get(presetValues, inputName, false)

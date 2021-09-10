@@ -6,12 +6,12 @@ import { outputDescription } from '../../utils/inputSettings'
 const InputWrapper = ({
     children,
     errors,
+    label,
     inputData: {
         cssClass,
         description,
         descriptionPlacement,
         isRequired,
-        label,
         maxLength,
         type,
     },
@@ -32,7 +32,7 @@ const InputWrapper = ({
                 className="gravityform__label gfield_label"
                 htmlFor={labelFor}
             >
-                {label}
+                {label || inputData.label}
                 {isRequired && <span className="gfield_required">*</span>}
             </label>
             {outputDescription(

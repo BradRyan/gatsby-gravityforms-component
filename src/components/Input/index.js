@@ -4,7 +4,15 @@ import React from 'react'
 import strings from '../../utils/strings'
 import InputWrapper from '../InputWrapper'
 
-const Input = ({ errors, fieldData, name, register, value, ...wrapProps }) => {
+const Input = ({
+    errors,
+    fieldData,
+    label,
+    name,
+    register,
+    value,
+    ...wrapProps
+}) => {
     const {
         cssClass,
         inputMaskValue,
@@ -39,6 +47,7 @@ const Input = ({ errors, fieldData, name, register, value, ...wrapProps }) => {
             errors={errors}
             inputData={fieldData}
             labelFor={name}
+            label={label}
             {...wrapProps}
         >
             <input
