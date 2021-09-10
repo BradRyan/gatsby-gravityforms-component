@@ -18,7 +18,7 @@ const Name = ({
     const { inputs } = fieldData
 
     return (
-        <div>
+        <div className="gravityform__field--compound">
             {inputs.map((input) => {
                 if (input.isHidden) return null
                 const inputName = `input_${input.id}`
