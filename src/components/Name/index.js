@@ -22,16 +22,13 @@ const Name = ({
             {inputs.map((input) => {
                 if (input.isHidden) return null
                 const inputName = `input_${input.id}`
-                const inputErrors = {
-                    [inputName]:
-                        errors.find(({ ref }) => ref.id === inputName) || {},
-                }
-
-                console.warn({ inputErrors })
+                const inputError = errors.find(
+                    (error) => error?.ref?.id === inputName
+                )
 
                 return (
                     <Input
-                        errors={inputErrors}
+                        errors={inputError}
                         fieldData={{
                             ...fieldData,
                             label: input.label,
@@ -56,7 +53,7 @@ const Name = ({
 export default Name
 
 Name.propTypes = {
-    errors: PropTypes.object,
+    errors: PropTypes.arrayOf(PropTypes.shape()),
     fieldData: PropTypes.shape({
         cssClass: PropTypes.string,
         inputMaskValue: PropTypes.string,
