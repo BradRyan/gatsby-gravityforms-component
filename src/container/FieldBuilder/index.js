@@ -163,7 +163,7 @@ const FieldBuilder = ({
                     />
                 )
 
-            // TODO: What do other compount inputs look like?
+            // TODO: Can we support other compound fields with a common component? Perhaps we look for field.inputs?
             case 'name':
                 return (
                     <Name
