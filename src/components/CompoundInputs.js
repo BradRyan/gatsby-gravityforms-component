@@ -1,10 +1,9 @@
-import classnames from 'classnames'
 import PropTypes from 'prop-types'
 import React from 'react'
 import get from 'lodash/get'
 
-import Input from '../Input'
-import { ifDefaultValue } from '../../utils/inputSettings'
+import Input from './Input'
+import { ifDefaultValue } from '../utils/inputSettings'
 
 const CompoundInputs = ({
     type,
