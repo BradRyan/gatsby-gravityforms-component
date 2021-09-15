@@ -54,14 +54,22 @@ const GravityFormForm = ({
 
                 const formData = Object.entries(values).reduce(
                     (accum, [key, value]) => {
+                        // TODO: testing compound fieldset submissions, but unsure if other forms expect array value submissions
                         if (Array.isArray(value)) {
-                            const inputObjects = value.map(
-                                (inputValue, index) => ({
-                                    [`${key}.${index}`]: inputValue,
-                                })
+                            const inputObjects = value.reduce(
+                                (_accum, inputValue, index) => {
+                                    if (!inputValue) return _accum
+                                    return {
+                                        ..._accum,
+                                        [`${key}.${index}`]: inputValue,
+                                    }
+                                },
+                                {}
                             )
+
                             return { ...accum, ...inputObjects }
                         }
+
                         return { ...accum, [key]: value }
                     },
                     {}
