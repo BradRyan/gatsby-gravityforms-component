@@ -7,6 +7,7 @@ import InputWrapper from '../InputWrapper'
 const Input = ({ errors, fieldData, name, register, value, ...wrapProps }) => {
     const {
         cssClass,
+        className,
         inputMaskValue,
         isRequired,
         maxLength: fieldDataMaxLength,
@@ -48,6 +49,7 @@ const Input = ({ errors, fieldData, name, register, value, ...wrapProps }) => {
                     'gravityform__field__input',
                     `gravityform__field__input__${type}`,
                     cssClass,
+                    className,
                     size
                 )}
                 defaultValue={value}

@@ -1,27 +1,10 @@
-import classnames from 'classnames'
-import PropTypes from 'prop-types'
 import React from 'react'
-import get from 'lodash/get'
 
-import Input from '../Input'
-import { ifDefaultValue } from '../../utils/inputSettings'
-
-const Name = ({
-    errors = [],
-    fieldData,
-    name,
-    register,
-    value,
-    presetValues,
-    wrapId,
-    ...wrapProps
-}) => {
-    const { inputs } = fieldData
-
+const Address = () => {
     return (
         <fieldset
             id={wrapId}
-            className="gravityform__field--fieldset advanced-field--name"
+            className="gravityform__field--fieldset advanced-field--address"
         >
             {inputs.map((input) => {
                 if (input.isHidden) return null
@@ -55,21 +38,4 @@ const Name = ({
     )
 }
 
-export default Name
-
-Name.propTypes = {
-    errors: PropTypes.arrayOf(PropTypes.shape()),
-    fieldData: PropTypes.shape({
-        cssClass: PropTypes.string,
-        inputMaskValue: PropTypes.string,
-        maxLength: PropTypes.number,
-        placeholder: PropTypes.string,
-        isRequired: PropTypes.bool,
-        type: PropTypes.string,
-        size: PropTypes.string,
-    }),
-    name: PropTypes.string,
-    register: PropTypes.func,
-    value: PropTypes.string,
-    wrapProps: PropTypes.object,
-}
+export default Address

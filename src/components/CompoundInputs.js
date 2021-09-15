@@ -6,7 +6,8 @@ import get from 'lodash/get'
 import Input from '../Input'
 import { ifDefaultValue } from '../../utils/inputSettings'
 
-const Name = ({
+const CompoundInputs = ({
+    type,
     errors = [],
     fieldData,
     name,
@@ -21,7 +22,7 @@ const Name = ({
     return (
         <fieldset
             id={wrapId}
-            className="gravityform__field--fieldset advanced-field--name"
+            className={`gravityform__field--fieldset advanced-field--${type}`}
         >
             {inputs.map((input) => {
                 if (input.isHidden) return null
@@ -32,6 +33,7 @@ const Name = ({
 
                 return (
                     <Input
+                        className={input.autocompleteAttribute}
                         errors={inputError}
                         fieldData={{
                             ...fieldData,
@@ -55,9 +57,9 @@ const Name = ({
     )
 }
 
-export default Name
+export default CompoundInputs
 
-Name.propTypes = {
+CompoundInputs.propTypes = {
     errors: PropTypes.arrayOf(PropTypes.shape()),
     fieldData: PropTypes.shape({
         cssClass: PropTypes.string,

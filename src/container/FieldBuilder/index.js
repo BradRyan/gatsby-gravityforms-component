@@ -3,6 +3,7 @@ import get from 'lodash/get'
 import React from 'react'
 
 import Captcha from '../../components/Captcha'
+import CompoundInputs from '../../components/CompoundInputs'
 import Html from '../../components/Html'
 import Input from '../../components/Input'
 import Multiselect from '../../components/Multiselect'
@@ -166,9 +167,25 @@ const FieldBuilder = ({
                 )
 
             // TODO: Can we support other compound fields with a common component? Perhaps we look for field.inputs?
+            // case 'name':
+            //     return (
+            //         <Name
+            //             name={inputName}
+            //             errors={errors[inputName]}
+            //             register={register}
+            //             presetValues={presetValues}
+            //             fieldData={fieldData}
+            //             key={field.id}
+            //             wrapClassName={inputWrapperClass}
+            //             wrapId={wrapId}
+            //         />
+            //     )
+
             case 'name':
+            case 'address':
                 return (
-                    <Name
+                    <CompoundInputs
+                        type={field.type}
                         name={inputName}
                         errors={errors[inputName]}
                         register={register}
@@ -179,9 +196,6 @@ const FieldBuilder = ({
                         wrapId={wrapId}
                     />
                 )
-
-            case 'address':
-                return <div>Address Form Here</div>
 
             default:
                 return null
