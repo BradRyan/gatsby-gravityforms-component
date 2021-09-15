@@ -30,14 +30,8 @@ const GravityFormForm = ({
     errorCallback,
 }) => {
     // Pull in form functions
-    const {
-        errors,
-        handleSubmit,
-        register,
-        reset,
-        setError,
-        setValue,
-    } = useForm()
+    const { errors, handleSubmit, register, reset, setError, setValue } =
+        useForm()
 
     const [generalError, setGeneralError] = useState('')
     const [formLoading, setLoadingState] = useState(false)
@@ -48,7 +42,7 @@ const GravityFormForm = ({
     // Take ID argument and graphQL Gravity Form data for this form
     const singleForm = getForm(formData, id)
 
-    const onSubmitCallback = async values => {
+    const onSubmitCallback = async (values) => {
         // Make sure we are not already waiting for a response
         if (!formLoading) {
             // Clean error
@@ -58,9 +52,24 @@ const GravityFormForm = ({
             if (submissionHasOneFieldEntry(values)) {
                 setLoadingState(true)
 
+                const formData = Object.entries(values).reduce(
+                    (accum, [key, value]) => {
+                        if (Array.isArray(value)) {
+                            const inputObjects = value.map(
+                                (inputValue, index) => ({
+                                    [`${key}.${index}`]: inputValue,
+                                })
+                            )
+                            return { ...accum, ...inputObjects }
+                        }
+                        return { ...accum, [key]: value }
+                    },
+                    {}
+                )
+
                 const { data, status } = await passToGravityForms({
                     baseUrl: singleForm.apiURL,
-                    formData: values,
+                    formData,
                     id,
                     lambdaEndpoint: lambda,
                 })
@@ -91,7 +100,9 @@ const GravityFormForm = ({
 
                     const { confirmations } = singleForm
 
-                    const confirmation = confirmations?.find(el => el.isDefault)
+                    const confirmation = confirmations?.find(
+                        (el) => el.isDefault
+                    )
 
                     setConfirmationMessage(
                         confirmation_message || confirmation?.message || false
@@ -133,7 +144,8 @@ const GravityFormForm = ({
                                 className={classnames(
                                     'gform_fields',
                                     {
-                                        [`form_sublabel_${singleForm.subLabelPlacement}`]: singleForm.subLabelPlacement,
+                                        [`form_sublabel_${singleForm.subLabelPlacement}`]:
+                                            singleForm.subLabelPlacement,
                                     },
                                     `description_${singleForm.descriptionPlacement}`,
                                     `${singleForm.labelPlacement}`
