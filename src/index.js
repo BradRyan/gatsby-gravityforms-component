@@ -61,7 +61,7 @@ const GravityFormForm = ({
                                     if (!inputValue) return _accum
                                     return {
                                         ..._accum,
-                                        [`${key}.${index}`]: inputValue,
+                                        [`${key}_${index}`]: inputValue,
                                     }
                                 },
                                 {}
