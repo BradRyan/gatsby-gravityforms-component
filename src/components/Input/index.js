@@ -4,10 +4,17 @@ import React from 'react'
 import strings from '../../utils/strings'
 import InputWrapper from '../InputWrapper'
 
-const Input = ({ errors, fieldData, name, register, value, ...wrapProps }) => {
+const Input = ({
+    className,
+    errors,
+    fieldData,
+    name,
+    register,
+    value,
+    ...wrapProps
+}) => {
     const {
         cssClass,
-        className,
         inputMaskValue,
         isRequired,
         maxLength: fieldDataMaxLength,
@@ -48,8 +55,8 @@ const Input = ({ errors, fieldData, name, register, value, ...wrapProps }) => {
                 className={classnames(
                     'gravityform__field__input',
                     `gravityform__field__input__${type}`,
-                    cssClass,
                     className,
+                    cssClass,
                     size
                 )}
                 defaultValue={value}
