@@ -13,12 +13,13 @@ const Name = ({
     register,
     value,
     presetValues,
+    wrapId,
     ...wrapProps
 }) => {
     const { inputs } = fieldData
 
     return (
-        <div className="gravityform__field--compound">
+        <fieldset id={wrapId} className="gravityform__field--fieldset">
             {inputs.map((input) => {
                 if (input.isHidden) return null
                 const inputName = `input_${input.id}`
@@ -42,11 +43,12 @@ const Name = ({
                                 ? get(presetValues, inputName, false)
                                 : ifDefaultValue(input)
                         }
+                        wrapId={`${wrapId}_${input.id}`}
                         {...wrapProps}
                     />
                 )
             })}
-        </div>
+        </fieldset>
     )
 }
 
