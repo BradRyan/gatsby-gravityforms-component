@@ -32,6 +32,7 @@ const CompoundInputs = ({
     value,
     presetValues,
     wrapId,
+    wrapClassName,
     ...wrapProps
 }) => {
     const { inputs, isRequired } = fieldData
@@ -71,10 +72,7 @@ const CompoundInputs = ({
 
                 return (
                     <Input
-                        className={classnames(
-                            input.autocompleteAttribute,
-                            inputClassByAttribute[input.autocompleteAttribute]
-                        )}
+                        className={input.autocompleteAttribute}
                         errors={inputError}
                         fieldData={{
                             ...fieldData,
@@ -91,6 +89,10 @@ const CompoundInputs = ({
                                 : ifDefaultValue(input)
                         }
                         wrapId={`${wrapId}_${input.id}`}
+                        wrapClassName={classnames(
+                            wrapClassName,
+                            inputClassByAttribute[input.autocompleteAttribute]
+                        )}
                         {...wrapProps}
                     />
                 )
