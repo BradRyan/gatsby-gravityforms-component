@@ -35,7 +35,7 @@ const CompoundInputs = ({
     ...wrapProps
 }) => {
     const { inputs, isRequired } = fieldData
-    const inputClassLengths = INPUT_LENGTH_CLASS_BY_TYPE[type]
+    const inputClassByAttribute = INPUT_LENGTH_CLASS_BY_TYPE[type]
 
     return (
         <fieldset
@@ -54,6 +54,11 @@ const CompoundInputs = ({
                     (error) => error?.ref?.id === inputName
                 )
 
+                console.log({
+                    class: inputClassByAttribute[input.autocompleteAttribute],
+                    classes: inputClassByAttribute,
+                })
+
                 const isFieldRequired = (() => {
                     if (
                         type === 'address' &&
@@ -68,7 +73,7 @@ const CompoundInputs = ({
                     <Input
                         className={classnames(
                             input.autocompleteAttribute,
-                            inputClassLengths[input.autocompleteAttribute]
+                            inputClassByAttribute[input.autocompleteAttribute]
                         )}
                         errors={inputError}
                         fieldData={{
