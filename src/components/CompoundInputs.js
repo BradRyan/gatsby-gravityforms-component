@@ -1,13 +1,30 @@
 import PropTypes from 'prop-types'
 import React from 'react'
 import get from 'lodash/get'
+import classnames from 'classnames'
 
 import Input from './Input'
 import { ifDefaultValue } from '../utils/inputSettings'
 
+const INPUT_LENGTH_CLASS_BY_TYPE = {
+    address: {
+        'address-line1': 'ginput_full', // street address
+        'address-line2': 'ginput_full',
+        'address-level2': 'ginput_left', // city
+        'address-level1': 'ginput_right', // state
+        'postal-code': 'ginput_left',
+        'country-name': 'ginput_right',
+    },
+    name: {
+        'given-name': 'ginput_left', // first name
+        'family-name': 'ginput_right', // last name
+    },
+}
+
 const CompoundInputs = ({
     type,
     label,
+    groups,
     errors = [],
     fieldData,
     name,
@@ -18,6 +35,7 @@ const CompoundInputs = ({
     ...wrapProps
 }) => {
     const { inputs, isRequired } = fieldData
+    const inputClassLengths = INPUT_LENGTH_CLASS_BY_TYPE[type]
 
     return (
         <fieldset
@@ -29,7 +47,7 @@ const CompoundInputs = ({
                 {isRequired && <span className="gfield_required">*</span>}
             </label>
 
-            {inputs.map((input) => {
+            {inputs.map((input, index) => {
                 if (input.isHidden) return null
                 const inputName = `input_${input.id}`
                 const inputError = errors.find(
@@ -46,11 +64,12 @@ const CompoundInputs = ({
                     return true
                 })()
 
-                // TODO: figure out how to allow grouping. Maybe via a prop?
-
                 return (
                     <Input
-                        className={input.autocompleteAttribute}
+                        className={classnames(
+                            input.autocompleteAttribute,
+                            inputClassLengths[input.autocompleteAttribute]
+                        )}
                         errors={inputError}
                         fieldData={{
                             ...fieldData,
