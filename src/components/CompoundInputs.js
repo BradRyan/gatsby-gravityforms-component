@@ -43,60 +43,66 @@ const CompoundInputs = ({
             id={wrapId}
             className={`gravityform__field--fieldset advanced-field--${type}`}
         >
-            <label className="gravityform__label gfield_label" htmlFor={wrapId}>
+            <legend className="gravityform__label gfield_label">
                 {label}
                 {isRequired && <span className="gfield_required">*</span>}
-            </label>
+            </legend>
 
-            {inputs.map((input, index) => {
-                if (input.isHidden) return null
-                const inputName = `input_${input.id}`
-                const inputError = errors.find(
-                    (error) => error?.ref?.id === inputName
-                )
+            <div className="ginput_complex ginput_container">
+                {inputs.map((input, index) => {
+                    if (input.isHidden) return null
+                    const inputName = `input_${input.id}`
+                    const inputError = errors.find(
+                        (error) => error?.ref?.id === inputName
+                    )
 
-                console.log({
-                    class: inputClassByAttribute[input.autocompleteAttribute],
-                    classes: inputClassByAttribute,
-                })
+                    console.log({
+                        class: inputClassByAttribute[
+                            input.autocompleteAttribute
+                        ],
+                        classes: inputClassByAttribute,
+                    })
 
-                const isFieldRequired = (() => {
-                    if (
-                        type === 'address' &&
-                        input.autocompleteAttribute === 'address-line2'
-                    ) {
-                        return false
-                    }
-                    return true
-                })()
-
-                return (
-                    <Input
-                        className={input.autocompleteAttribute}
-                        errors={inputError}
-                        fieldData={{
-                            ...fieldData,
-                            label: input.label,
-                            type: 'text',
-                            isRequired: isFieldRequired,
-                        }}
-                        key={input.id}
-                        name={inputName}
-                        register={register}
-                        value={
-                            get(presetValues, inputName, false)
-                                ? get(presetValues, inputName, false)
-                                : ifDefaultValue(input)
+                    const isFieldRequired = (() => {
+                        if (
+                            type === 'address' &&
+                            input.autocompleteAttribute === 'address-line2'
+                        ) {
+                            return false
                         }
-                        wrapId={`${wrapId}_${input.id}`}
-                        wrapClassName={classnames(
-                            wrapClassName,
-                            inputClassByAttribute[input.autocompleteAttribute]
-                        )}
-                        {...wrapProps}
-                    />
-                )
-            })}
+                        return true
+                    })()
+
+                    return (
+                        <Input
+                            className={input.autocompleteAttribute}
+                            errors={inputError}
+                            fieldData={{
+                                ...fieldData,
+                                label: input.label,
+                                type: 'text',
+                                isRequired: isFieldRequired,
+                            }}
+                            key={input.id}
+                            name={inputName}
+                            register={register}
+                            value={
+                                get(presetValues, inputName, false)
+                                    ? get(presetValues, inputName, false)
+                                    : ifDefaultValue(input)
+                            }
+                            wrapId={`${wrapId}_${input.id}`}
+                            wrapClassName={classnames(
+                                wrapClassName,
+                                inputClassByAttribute[
+                                    input.autocompleteAttribute
+                                ]
+                            )}
+                            {...wrapProps}
+                        />
+                    )
+                })}
+            </div>
         </fieldset>
     )
 }
