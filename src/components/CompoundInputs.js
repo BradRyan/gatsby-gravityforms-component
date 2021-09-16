@@ -7,6 +7,7 @@ import { ifDefaultValue } from '../utils/inputSettings'
 
 const CompoundInputs = ({
     type,
+    label,
     errors = [],
     fieldData,
     name,
@@ -16,19 +17,36 @@ const CompoundInputs = ({
     wrapId,
     ...wrapProps
 }) => {
-    const { inputs } = fieldData
+    const { inputs, isRequired } = fieldData
 
     return (
         <fieldset
             id={wrapId}
             className={`gravityform__field--fieldset advanced-field--${type}`}
         >
+            <label className="gravityform__label gfield_label" htmlFor={wrapId}>
+                {label}
+                {isRequired && <span className="gfield_required">*</span>}
+            </label>
+
             {inputs.map((input) => {
                 if (input.isHidden) return null
                 const inputName = `input_${input.id}`
                 const inputError = errors.find(
                     (error) => error?.ref?.id === inputName
                 )
+
+                const isFieldRequired = (() => {
+                    if (
+                        type === 'address' &&
+                        input.autocompleteAttribute === 'address-line2'
+                    ) {
+                        return false
+                    }
+                    return true
+                })()
+
+                // TODO: figure out how to allow grouping. Maybe via a prop?
 
                 return (
                     <Input
@@ -38,6 +56,7 @@ const CompoundInputs = ({
                             ...fieldData,
                             label: input.label,
                             type: 'text',
+                            isRequired: isFieldRequired,
                         }}
                         key={input.id}
                         name={inputName}

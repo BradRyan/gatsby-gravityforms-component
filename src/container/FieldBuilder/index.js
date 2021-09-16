@@ -1,5 +1,6 @@
 import classnames from 'classnames'
 import get from 'lodash/get'
+import startCase from 'lodash/startCase'
 import React from 'react'
 
 import Captcha from '../../components/Captcha'
@@ -185,6 +186,7 @@ const FieldBuilder = ({
             case 'address':
                 return (
                     <CompoundInputs
+                        label={startCase(field.type)}
                         type={field.type}
                         name={inputName}
                         errors={errors[inputName]}
