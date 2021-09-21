@@ -56,13 +56,6 @@ const CompoundInputs = ({
                         (error) => error?.ref?.id === inputName
                     )
 
-                    console.log({
-                        class: inputClassByAttribute[
-                            input.autocompleteAttribute
-                        ],
-                        classes: inputClassByAttribute,
-                    })
-
                     const isFieldRequired = (() => {
                         if (
                             type === 'address' &&
